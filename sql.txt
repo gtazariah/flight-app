@@ -1,0 +1,32 @@
+create table states(
+id SERIAL PRIMARY KEY,
+state_code VARCHAR(2) NOT NUll,
+state_name VARCHAR(50) NOT NULL
+);
+
+create table flights (
+id serial primary key,
+departure_state VARCHAR(255) not null,
+arrival_state  varchar(255) not null,
+departure_time timestamp not null,
+arrival_time timestamp not null,
+price decimal(10,2)
+);
+
+create table tickets (
+id serial primary key,
+ticket_number varchar(50) not null,
+departure varchar(50) not null,
+arrival varchar(50) not null,
+departure_time timestamp not null,
+arrival_time timestamp not null,
+ticket_price decimal(10,2) not null,
+users varchar(50) not null
+);
+
+create table users (
+id serial primary key,
+name varchar(50) not null,
+password varchar(50) not null,
+email varchar(50) not null
+);
