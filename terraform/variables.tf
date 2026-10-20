@@ -2,10 +2,11 @@ variable "gcp_project" {
   type = string
 }
 
+/*
 variable "key_path" {
   type = string
 }
-
+*/
 variable "project_zone" {
   type = string
 }
