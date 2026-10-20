@@ -35,4 +35,3 @@ address_type   = "EXTERNAL"
 domain_name    = "flight-app-zone"
 domain_host    = "tamilbusinessnetwork.in."
 subdomain_host = "fapp.tamilbusinessnetwork.in."
-

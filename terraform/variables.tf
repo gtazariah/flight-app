@@ -72,4 +72,3 @@ variable "domain_host" {
 variable "subdomain_host" {
   type = string
 }
-
