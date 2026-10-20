@@ -7,6 +7,7 @@ variable "key_path" {
   type = string
 }
 */
+
 variable "project_zone" {
   type = string
 }

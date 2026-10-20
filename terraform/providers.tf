@@ -14,6 +14,6 @@ terraform {
 
 provider "google" {
   project     = var.gcp_project
-  credentials = file(var.key_path)
+  //credentials = file(var.key_path)
   zone        = var.project_zone
 }
