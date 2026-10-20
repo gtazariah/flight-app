@@ -2,7 +2,7 @@ terraform {
   backend "gcs" {
     bucket      = "azariah-flight-app-bucket"
     prefix      = "terraform"
-    credentials = "C:\\Users\\Admin\\Desktop\\keys\\gcp\\flight-project\\terraform-key.json"
+    // credentials = "C:\\Users\\Admin\\Desktop\\keys\\gcp\\flight-project\\terraform-key.json"
   }
   required_providers {
     google = {

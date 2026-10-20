@@ -1,5 +1,5 @@
 gcp_project  = "project-cc1a23d4-810e-4fde-a2e"
-key_path     = "C:\\Users\\Admin\\Desktop\\keys\\gcp\\flight-project\\terraform-key.json"
+// key_path     = "C:\\Users\\Admin\\Desktop\\keys\\gcp\\flight-project\\terraform-key.json"
 project_zone = "us-central1-a"
 
 
