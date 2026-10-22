@@ -58,46 +58,46 @@ jobs:
               uses: docker/build-push-action@v6
               with:
                 push: true
-                tags: ${{ secrets.DOCKERHUB_USERNAME }}/flight-booking:github-action-test
+                tags: ${{ secrets.DOCKERHUB_USERNAME }}/flight-booking:3.0
 
-            # - id: 'auth'
-            #   name: 'Authenticate to Google Cloud'
-            #   uses: 'google-github-actions/auth@v1'
-            #   with:
-            #     credentials_json: ${{ secrets.GOOGLE_SA_CREDENTIALS }}
+            - id: 'auth'
+              name: 'Authenticate to Google Cloud'
+              uses: 'google-github-actions/auth@v1'
+              with:
+                credentials_json: ${{ secrets.GOOGLE_SA_CREDENTIALS }}
 
-            # - name: 'Set up Cloud SDK'
-            #   uses: 'google-github-actions/setup-gcloud@v1'
+            - name: 'Set up Cloud SDK'
+              uses: 'google-github-actions/setup-gcloud@v1'
 
-            # - uses: azure/setup-helm@v4.2.0
-            #   with:
-            #      version: v3.9.4
+            - uses: azure/setup-helm@v4.2.0
+              with:
+                 version: v3.9.4
 
-            # - name: Prepare Application Deployment
-            #   run: |
-            #     gcloud config set project YOUR_GCP_PROJECT_ID
-            #     gcloud container clusters get-credentials demo-cluster --zone us-central1-a
-            #     gcloud components install kubectl
-            #     STATIC_IP=$(gcloud compute addresses describe flight-app-static-ip --region us-central1 --format "value(address)")
+            - name: Prepare Application Deployment
+              run: |
+                gcloud config set project project-cc1a23d4-810e-4fde-a2e
+                gcloud container clusters get-credentials demo-cluster --zone us-central1-a
+                gcloud components install kubectl
+                STATIC_IP=$(gcloud compute addresses describe flight-app-static-ip --region us-central1 --format "value(address)")
  
-            #     helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-            #     helm install my-ingress-nginx ingress-nginx/ingress-nginx --set controller.service.loadBalancerIP=$STATIC_IP --version 4.6.1
+                helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+                helm install my-ingress-nginx ingress-nginx/ingress-nginx --set controller.service.loadBalancerIP=$STATIC_IP --version 4.6.1
 
-            #     helm repo add jetstack https://charts.jetstack.io
-            #     helm repo update
-            #     helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.12.0 --set installCRDs=true
+                helm repo add jetstack https://charts.jetstack.io
+                helm repo update
+                helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.12.0 --set installCRDs=true
 
-            #     gcloud iam service-accounts create cert-manager-solver --display-name cert-manager-solver
-            #     gcloud projects add-iam-policy-binding YOUR_GCP_PROJECT_ID --member serviceAccount:cert-manager-solver@YOUR_GCP_PROJECT_ID.iam.gserviceaccount.com --role roles/dns.admin
-            #     gcloud iam service-accounts keys create key.json --iam-account cert-manager-solver@YOUR_GCP_PROJECT_ID.iam.gserviceaccount.com
+                gcloud iam service-accounts create cert-manager-solver --display-name cert-manager-solver
+                gcloud projects add-iam-policy-binding project-cc1a23d4-810e-4fde-a2e --member serviceAccount:cert-manager-solver@project-cc1a23d4-810e-4fde-a2e.iam.gserviceaccount.com --role roles/dns.admin
+                gcloud iam service-accounts keys create key.json --iam-account cert-manager-solver@project-cc1a23d4-810e-4fde-a2e.iam.gserviceaccount.com
 
-            #     echo "waiting for changing nameservers"
-            #     sleep 300
+                echo "waiting for changing nameservers"
+                sleep 300
 
-            # - name: Application Deployment
-            #   run: |
-            #     kubectl create secret generic creds --from-literal=username=postgres --from-literal=db=postgres --from-literal=host=postgres --from-literal=password=${{ secrets.POSTGRES_PASS }}
-            #     kubectl create secret generic dns-reslover-key --from-file=key.json=./key.json
+            - name: Application Deployment
+              run: |
+                kubectl create secret generic creds --from-literal=username=postgres --from-literal=db=postgres --from-literal=host=postgres --from-literal=password=${{ secrets.POSTGRES_PASS }}
+                kubectl create secret generic dns-reslover-key --from-file=key.json=./key.json
 
-            #     sleep 20
-            #     kubectl apply -f ./k8s
+                sleep 20
+                kubectl apply -f ./k8s
